@@ -14,16 +14,16 @@ var w;
 var h;
 var but;
 var m=0;
-
+var touches;
 function preload(){
   back = loadImage("bg.jpg");
   ninja = loadImage("ninja.png")
 }
 function setup() {
- w = displayWidth*3.5;
- h = displayHeight*3.5;
+ w = windowWidth;
+ h = windowHeight;
   createCanvas(w,h-h/7.5789);
-  
+  console.log(displayWidth,displayHeight)
   engine = Engine.create();
   world = engine.world;
   bob1 = new BobClass(w/7.68,h/3.456,w/21.94285714285714,h/12.34285714285714,90);
@@ -88,6 +88,7 @@ but.style('font-size','20px');
 
 function draw() {
   Engine.update(engine);
+  touches.length
   background(back);  
   fill("black");
   image(ninja,w/15.36,h/6.545454545454545,w/6.144,h/2.88);
@@ -202,13 +203,22 @@ if(m<8){
 
 function mouseDragged()
 {
-  if(gamestate === "onSling"&&mouseX<w/17.92&&m<=8){
+  if(gamestate === "onSling"){
+    if(mouseX<w/5.485714285714286&&m<=8){
+      
     Matter.Body.setPosition(bob1.body,{x:mouseX,y:mouseY});
+
+    }
+    else if(touches.length>0){
+
+    Matter.Body.setPosition(bob1.body,touches.length);
+    touches = [];
+    }
   }
 }
 function mouseReleased()
 {
-  if(mouseX<w/17.92&&m<=8){
+  if(mouseX<w/5.485714285714286&&m<=8){
     shot.fly();
     gamestate = "launched";
   }
