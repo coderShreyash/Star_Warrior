@@ -20,10 +20,10 @@ function preload(){
   ninja = loadImage("ninja.png")
 }
 function setup() {
- w = displayWidth;
- h = displayHeight;
-  createCanvas(displayWidth,displayHeight-displayHeight/7.5789);
-  console.log(displayWidth,displayHeight)
+ w = displayWidth*2;
+ h = displayHeight*2;
+  createCanvas(w,h-h/7.5789);
+  
   engine = Engine.create();
   world = engine.world;
   bob1 = new BobClass(displayWidth/7.68,h/3.456,w/21.94285714285714,h/12.34285714285714,90);
@@ -202,13 +202,13 @@ if(m<8){
 
 function mouseDragged()
 {
-  if(gamestate === "onSling"&&mouseX<w/5.485714285714286&&m<=8){
+  if(gamestate === "onSling"&&mouseX<w/10.24&&m<=8){
     Matter.Body.setPosition(bob1.body,{x:mouseX,y:mouseY});
   }
 }
 function mouseReleased()
 {
-  if(mouseX<w/5.485714285714286&&m<=8){
+  if(mouseX<w/10.24&&m<=8){
     shot.fly();
     gamestate = "launched";
   }
